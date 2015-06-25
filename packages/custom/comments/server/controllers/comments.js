@@ -40,7 +40,23 @@ var mongoose = require('mongoose'),
           res.json(comment);
         }
       });
- 		}
+ 		},
+
+    fetchByArticle: function(req,res){
+      var articleId = req.body.articleId;
+
+      Comment.find({article: articleId})
+      .populate("user","name username")
+      .exec(function(err,comments){
+        if (err){
+          res.status(500).json({
+            error: "Could not fetch comments"
+          });
+        }else{
+          res.json(comments);
+        }
+      })
+    },
  	}
  }
 

@@ -19,6 +19,9 @@ module.exports = function(Comments, app, auth, database) {
   app.route('/api/comments/')
     .post(auth.requiresLogin, comments.create);
 
+    app.route('/api/comments/article/:articleId')
+    .post(comments.fetchByArticle);
+
   //Finish with setting up the postId param
   app.param('commentId', comments.comment);
 };
