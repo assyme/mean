@@ -30,6 +30,10 @@ var CommentSchema = new Schema({
   article: {
   	type: Schema.ObjectId,
   	ref: 'Article'
+  },
+  isApproved: {
+    type: Boolean,
+    default: false
   }
 });
 

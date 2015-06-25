@@ -42,10 +42,14 @@ var mongoose = require('mongoose'),
       });
  		},
 
+    /**
+     * Returns comments for an article. 
+     */
     fetchByArticle: function(req,res){
       var articleId = req.body.articleId;
 
       Comment.find({article: articleId})
+      .where({'$or':[{'isApproved':true},{'user':req.user}]})
       .populate("user","name username")
       .exec(function(err,comments){
         if (err){
