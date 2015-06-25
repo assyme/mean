@@ -11,4 +11,7 @@
     </a>
   </div>
   <div>{{article.content}}</div>
+  <!-- Comments widget -->  
+  <div ng-if="article !== undefined " ng-include src="'/comments/views/comment_widget.html'" data-ng-init="init(article)" data-ng-controller="CommentsController">
+  </div>
 </section>
