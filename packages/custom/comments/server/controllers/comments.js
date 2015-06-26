@@ -61,6 +61,20 @@ var mongoose = require('mongoose'),
         }
       })
     },
+
+    /**
+      * List of Articles
+      */
+      fetchPendingComments: function(req, res) {
+          Comment.find({'$or': [{'isApproved' : false},{'isApproved': {'$exists':false}}]}).sort('-created').populate('user', 'name username').exec(function(err, comments) {
+              if (err) {
+                  return res.status(500).json({
+                      error: 'Cannot list the comments'
+                  });
+              }
+              res.json(comments);
+          });
+      }
  	}
  }
 

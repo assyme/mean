@@ -33,5 +33,11 @@ angular.module('mean.comments').controller('CommentsController', ['$scope', 'Glo
     	}
     }
 
+    $scope.fetchPendingArticles = function(){
+    	CommentsConnection.PendingComments().success(function(response){
+    		$scope.pendingComments = response;
+    	})
+    }
+
   }
 ]);

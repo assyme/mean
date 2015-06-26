@@ -1,5 +1,13 @@
 <div class="" data-ng-controller="CommentsController">
   <h1>Comments Approval Page</h1>
-  <h1>Coming Soon</h1>
+  <div ng-init="fetchPendingArticles()">
+    <div ng-repeat="comment in pendingComments" class="panel panel-default">
+        <div class="panel-body">
+          {{comment.content}}
+        </div>
+      <div class="panel-footer">By {{comment.user.username}} on {{comment.created | date:'medium'}}</div>
+    </div>
+
+  </div>
 </div>
 

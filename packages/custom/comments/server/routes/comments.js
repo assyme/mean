@@ -22,6 +22,9 @@ module.exports = function(Comments, app, auth, database) {
     app.route('/api/comments/article/:articleId')
     .post(comments.fetchByArticle);
 
+    app.route('/api/comments/pending/')
+    .get(comments.fetchPendingComments);
+
   //Finish with setting up the postId param
   app.param('commentId', comments.comment);
 };
