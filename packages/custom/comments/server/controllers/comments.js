@@ -74,7 +74,28 @@ var mongoose = require('mongoose'),
               }
               res.json(comments);
           });
+      },
+
+      /**
+       * updates a comment
+       */
+      update : function(req,res){
+        console.log("updating..");
+        var commentId = req.body.commentId;
+
+        Comment.findOne({ '_id': commentId }, function (err, comment){
+          comment.isApproved = true;
+          comment.save(function(err){
+            if (err){
+              return res.status(500).json({
+                error: "Could not save the comment"
+              });
+            }else{
+              res.json(comment);
+            }
+          });
+        });
       }
- 	}
+ 	  }
  }
 

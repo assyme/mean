@@ -19,6 +19,10 @@ angular.module('mean.comments').factory('CommentsConnection', ['$resource','$htt
 		return http.get('/api/comments/pending/');
 	}
 
+	CommentsConnectionClass.prototype.ApproveComment = function(commentId){
+		return http.put('/api/comments/' + commentId,{commentId: commentId});	
+	}
+
 	return new CommentsConnectionClass();
 	
 }]);

@@ -1,13 +1,17 @@
 <div class="" data-ng-controller="CommentsController">
   <h1>Comments Approval Page</h1>
   <div ng-init="fetchPendingArticles()">
-    <div ng-repeat="comment in pendingComments" class="panel panel-default">
-        <div class="panel-body">
-          {{comment.content}}
-        </div>
-      <div class="panel-footer">By {{comment.user.username}} on {{comment.created | date:'medium'}}</div>
+    <div ng-repeat="comment in pendingComments">
+      <div ng-hide="comment.isApproved" class="panel panel-default">
+          <div class="panel-body">
+            {{comment.content}}
+            <button class="btn btn-primary pull-right" ng-click="approveComment(comment)" type="button">
+              Approve 
+            </button>
+          </div>
+        <div  class="panel-footer">By {{comment.user.username}} on {{comment.created | date:'medium'}}</div>
+      </div>
     </div>
-
   </div>
 </div>
 

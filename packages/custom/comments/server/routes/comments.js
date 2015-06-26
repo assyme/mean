@@ -3,7 +3,7 @@
 
 // Comment authorization helpers
 var hasAuthorization = function(req, res, next) {
-  if (!req.user.isAdmin && !req.article.user._id.equals(req.user._id)) {
+  if (req.user.roles.indexOf('admin') < 0) {
     return res.status(401).send('User is not authorized');
   }
   next();
@@ -15,9 +15,12 @@ module.exports = function(Comments, app, auth, database) {
   
   var comments = require('../controllers/comments')(Comments);
   
-
-  app.route('/api/comments/')
-    .post(auth.requiresLogin, comments.create);
+  
+    app.route('/api/comments/')
+    .post(auth.requiresLogin, comments.create)
+  
+    app.route('/api/comments/:commentId')
+    .put(auth.isMongoId, auth.requiresLogin, hasAuthorization, comments.update);
 
     app.route('/api/comments/article/:articleId')
     .post(comments.fetchByArticle);

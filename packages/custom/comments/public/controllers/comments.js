@@ -39,5 +39,15 @@ angular.module('mean.comments').controller('CommentsController', ['$scope', 'Glo
     	})
     }
 
+    $scope.approveComment = function(comment){
+    	CommentsConnection.ApproveComment(comment._id).success(function(response){
+    		if (response.error){
+
+    		}else{
+    			comment.isApproved = true;
+    		}
+    	});
+    }
+
   }
 ]);

@@ -20,7 +20,7 @@ Comments.register(function(app, auth, database) {
   Comments.menus.add({
     title: 'Comments',
     link: 'comments',
-    roles: ['admin'],
+    roles: ['authenticated'],
     menu: 'main'
   });
   
